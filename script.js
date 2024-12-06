@@ -1,5 +1,6 @@
 // script.js
 
+// 以下は刺激の一覧です。Nonword・RealWord・Filterの3つの数および単語を修正することができます。
 const main_stimuli = [
     ["piewed","piewed_Nonword"],
     ["spicel","spicel_Nonword"],
@@ -35,7 +36,7 @@ let stimuli = [];
 let experimentStartTime = null; // 最初の'5'トリガー時刻
 let trialStartTime = 0; 
 let stimulusTimeout = null; 
-let currentResponse = null; // 刺激中に得られた応答（'1','2'など）
+let currentResponse = null; // 刺激中に得られた応答（'1','2'）
 const displayArea = document.getElementById("display-area");
 
 function getCondition(wordType) {
@@ -68,6 +69,7 @@ function shuffleAndAvoidTripleCondition(arr) {
     return arrCopy;
 }
 
+// フォントサイズを変更する場合は以下を修正します
 function showText(text) {
     displayArea.style.fontSize = "28pt";
     displayArea.textContent = text;
@@ -81,7 +83,7 @@ function showFixation() {
 
 function logEvent(target_word, stimuli_type, response) {
     if (experimentStartTime === null) {
-        // まだ最初の'5'が押されていない場合は記録しない
+        // まだ最初の'5'が押されていない場合は記録しません
         return;
     }
     let t = performance.now() - experimentStartTime;
@@ -98,7 +100,7 @@ function startExperiment() {
     stimuli = shuffleAndAvoidTripleCondition(main_stimuli);
     currentIndex = 0;
     trialRunning = false;
-    // 開始前に10秒固定注視
+    // 開始前に10秒固定注視を追加します
     showFixation();
     setTimeout(() => {
         nextTrial();
@@ -107,7 +109,7 @@ function startExperiment() {
 
 function nextTrial() {
     if (currentIndex >= stimuli.length) {
-        // 最終刺激後10秒注視
+        // 最終刺激後10秒注視を追加します
         showFixation();
         setTimeout(() => {
             endExperiment();
@@ -130,7 +132,7 @@ function showWord(word, wordType) {
     displayArea.style.fontSize = "64pt";
     displayArea.textContent = word;
 
-    // 刺激提示記録
+    // 刺激の提示を記録
     let cond = getCondition(wordType);
     logEvent(word, cond, "None");
 
@@ -145,7 +147,7 @@ function finishTrial(word, cond) {
     clearTimeout(stimulusTimeout);
     stimulusTimeout = null;
 
-    // 3秒経過後、final応答記録
+    // 3秒経過後、最後の応答を記録します
     let finalResponse = currentResponse ? currentResponse : "noresponse";
     logEvent(word, cond, finalResponse);
 
@@ -156,7 +158,7 @@ function finishTrial(word, cond) {
 
 function recordKeyPress(key) {
     // 全てのキー押下を記録（ただしexperimentStartTime後）
-    // '5'はMRIトリガーとして記録、1,2はKeyPressで記録
+    // 5はMRIトリガーとして記録し、1,2はKeyPressで記録
     if (key === "5") {
         logEvent("5", "Trigger", "5");
     } else if (key === "1" || key === "2") {
