@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Lexical Decision Task</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: black;
+        color: white;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    #display-area {
+        max-width: 80%;
+        text-align: center;
+        white-space: pre-wrap;
+        line-height: 1.5;
+        font-size: 64pt; /* 要求通り64pt */
+        margin: auto;
+    }
+    .hidden {
+        display: none;
+    }
+    a {
+        color: #00ff00;
+        font-size: 1.5rem;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div id="display-area"></div>
+<a id="download-link" class="hidden">結果をダウンロード</a>
+<script src="script.js"></script>
+</body>
+</html>
